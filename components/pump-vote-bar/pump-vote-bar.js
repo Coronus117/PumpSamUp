@@ -4,12 +4,14 @@ import { getCurrentExerciseRoutine, getFilteredExercise } from "@/exercises";
 
 const PumpVoteBar = () => {
   const currentExRoutine = getCurrentExerciseRoutine();
+  console.log("currentExRoutine ", currentExRoutine);
   return (
     <div className="flex space-x-4">
-      {currentExRoutine.map((ex) => {
-        let exerciseData = getFilteredExercise(ex);
-        return <ExerciseVote key={ex} exercise={exerciseData} />;
-      })}
+      {currentExRoutine &&
+        currentExRoutine.map((ex) => {
+          let exerciseData = getFilteredExercise(ex);
+          return <ExerciseVote key={ex} exercise={exerciseData} />;
+        })}
     </div>
   );
 };
