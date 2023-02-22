@@ -5,7 +5,7 @@ import PumpVoteBar from "@/components/pump-vote-bar/pump-vote-bar";
 export default function Home() {
   return (
     <div className="p-4">
-      <PumpBank />
+      {/* <PumpBank /> */}
       <div className="flex justify-center">
         <PumpVoteBar />
       </div>

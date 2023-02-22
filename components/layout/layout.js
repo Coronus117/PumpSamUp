@@ -4,10 +4,10 @@ import MainHeader from "./main-header";
 
 function Layout(props) {
   return (
-    <Fragment>
+    <div className="bg-gray-100 container mx-auto">
       <MainHeader />
       <main>{props.children}</main>
-    </Fragment>
+    </div>
   );
 }
 
