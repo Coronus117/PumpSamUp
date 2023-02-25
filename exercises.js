@@ -136,7 +136,6 @@ export const getCurrentExerciseRoutine = () => {
   const diffDays = Math.floor(Math.abs((currDate - originDate) / oneDay));
   let mondaysAndThusdaysPast =
     countCertainDays([1, 4], originDate, currDate) - 1;
-
   return DUMMY_EX_ROUTINES[mondaysAndThusdaysPast % DUMMY_EX_ROUTINES.length];
 };
 
