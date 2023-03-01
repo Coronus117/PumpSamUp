@@ -18,7 +18,7 @@ function MainHeader() {
         <div className="flex justify-between lg:grid lg:grid-cols-4 lg:grid-rows-1">
           <div className="flex col-start-2 col-span-2 justify-center font-extrabold text-3xl lg:text-5xl">
             <Link href="/">
-              <span class="inline-block align-middle ...">PUMP SAM UP</span>
+              <span className="inline-block align-middle">PUMP SAM UP</span>
             </Link>
           </div>
           <div className="flex flex-row justify-end space-x-4">

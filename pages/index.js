@@ -8,7 +8,7 @@ export default function Home() {
     <div className="p-3 lg:p-4 leading-tight flex justify-center ">
       <div className="lg:w-1/2 flex flex-col w-full space-y-2">
         <NextPump />
-        {/* <PumpBank /> */}
+        <PumpBank />
         <PumpVoteBar />
       </div>
     </div>

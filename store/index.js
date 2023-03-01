@@ -1,4 +1,4 @@
-import { createStore } from "redux";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   votes: 10,
@@ -12,42 +12,45 @@ const initialState = {
   },
 };
 
-const votesReducer = (state = { ...initialState }, action) => {
-  if (action.type === "exerciseVoteIncrement") {
-    const newState = {
-      ...state,
-      votes: state.votes - 1,
-      voteHistory: {
-        [action.date]: state.voteHistory[action.date].map((ex) => {
-          if (ex.name === action.name) {
-            ex.votes = ex.votes + 1;
+const voteSlice = createSlice({
+  name: "voteData",
+  initialState: initialState,
+  reducers: {
+    exerciseVoteIncrement(state, action) {
+      state.votes -= 1;
+      state.voteHistory = {
+        [action.payload.date]: state.voteHistory[action.payload.date].map(
+          (ex) => {
+            if (ex.name === action.payload.name) {
+              ex.votes = ex.votes + 1;
+            }
+            return ex;
           }
-          return ex;
-        }),
-      },
-    };
-    return newState;
-  }
-
-  if (action.type === "exerciseVoteDecrement") {
-    const newState = {
-      ...state,
-      votes: state.votes + 1,
-      voteHistory: {
-        [action.date]: state.voteHistory[action.date].map((ex) => {
-          if (ex.name === action.name) {
-            ex.votes = ex.votes - 1;
+        ),
+      };
+    },
+    exerciseVoteDecrement(state, action) {
+      state.votes += 1;
+      state.voteHistory = {
+        [action.payload.date]: state.voteHistory[action.payload.date].map(
+          (ex) => {
+            if (ex.name === action.payload.name) {
+              ex.votes = ex.votes - 1;
+            }
+            return ex;
           }
-          return ex;
-        }),
-      },
-    };
-    return newState;
-  }
+        ),
+      };
+    },
+  },
+});
+// Multiple reducers can be used / combined like this!...
+// const store = configureStore({ reducer: { votes: voteSlice.reducer } });
+// Just one reducer
+const store = configureStore({
+  reducer: voteSlice.reducer,
+});
 
-  return state;
-};
-
-const store = createStore(votesReducer);
+export const voteActions = voteSlice.actions;
 
 export default store;
