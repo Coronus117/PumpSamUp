@@ -3,11 +3,11 @@ import { createStore } from "redux";
 const initialState = {
   votes: 10,
   voteHistory: {
-    v2023_02_27: [
-      { name: "Bench Press", votes: 0 },
-      { name: "Bent Over Row", votes: 0 },
-      { name: "Squat", votes: 0 },
-      { name: "Plank", votes: 0 },
+    v2023_03_02: [
+      { name: "Tricep Dips", votes: 0 },
+      { name: "Bicep Curls", votes: 0 },
+      { name: "Calf Raise", votes: 0 },
+      { name: "Crunch", votes: 0 },
     ],
   },
 };

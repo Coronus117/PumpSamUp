@@ -129,14 +129,16 @@ const DUMMY_EX_ROUTINES = [
 export const getCurrentExerciseRoutine = () => {
   //12am on tues 2/21
   const originDate = new Date("2023-02-21");
-  // const currDate = new Date();
-  const currDate = new Date("2023-02-21");
+  const currDate = new Date();
+  // const currDate = new Date("2023-02-21");
   const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 
   const diffDays = Math.floor(Math.abs((currDate - originDate) / oneDay));
   let mondaysAndThusdaysPast =
     countCertainDays([1, 4], originDate, currDate) - 1;
-  return DUMMY_EX_ROUTINES[mondaysAndThusdaysPast % DUMMY_EX_ROUTINES.length];
+  const whichExerciseRoutine =
+    mondaysAndThusdaysPast % DUMMY_EX_ROUTINES.length;
+  return DUMMY_EX_ROUTINES[whichExerciseRoutine];
 };
 
 // days is an array of weekdays: 0 is Sunday, ..., 6 is Saturday
