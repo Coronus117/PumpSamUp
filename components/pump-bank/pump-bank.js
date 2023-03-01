@@ -2,7 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const PumpBank = () => {
-  const votes = useSelector((state) => state.votes);
+  // const votes = useSelector((state) => state.votes);
+  const votes = 11;
   return (
     <div className="flex justify-end">
       {votes && (
