@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const PumpBank = () => {
   const votes = useSelector((state) => state.votes);
-  console.log("pump-bank, state.votes ", state.votes);
+  console.log("pump-bank, votes ", votes);
   return (
     <div className="flex justify-end">
       <div className="bg-gray-300 p-4 rounded-xl text-lg font-semibold">{`Vote Bank: ${votes}/10`}</div>
