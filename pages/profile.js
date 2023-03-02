@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 import { getSession } from "next-auth/client";
 
+import ChangePassword from "@/components/auth/change-password-form";
+
 const Profile = () => {
-  return <div>THIS IS YOUR PROFILE PAGE</div>;
+  return (
+    <div className="flex justify-center mt-4">
+      <ChangePassword />
+    </div>
+  );
 };
 
 export default Profile;

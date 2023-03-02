@@ -60,6 +60,7 @@ const ExerciseVote = ({ exercise }) => {
     (ex) => ex.name === exercise.name
   );
   // const thisExercise = { name: "Tricep Dips", votes: 0 };
+  console.log("exercise-vote, thisExercise[0].votes ", thisExercise[0].votes);
   const votesSpent = thisExercise[0].votes;
   // const votesSpent = 0;
 

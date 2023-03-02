@@ -1,12 +1,8 @@
-import NextPump from "../next-pump/next-pump";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/client";
 
 function MainHeader() {
   const [session, loading] = useSession();
-
-  console.log("loading ", loading);
-  console.log("session ", session);
 
   const logoutHandler = () => {
     signOut();
