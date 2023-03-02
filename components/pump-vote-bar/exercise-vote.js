@@ -56,18 +56,11 @@ const ExerciseVote = ({ exercise }) => {
   // Get how many votes the user spent on this exercise for the upcoming show
   // All spent points are in the user's voteHistory.
   const nextShowDate = getNextShowDateStringForHistory();
-  console.log("exercise-vote, nextShowDate ", nextShowDate);
-  console.log("exercise-vote, store ", store);
   console.log("exercise-vote, store.voteHistory ", store.voteHistory);
   const thisExercise = store.voteHistory[nextShowDate].filter((ex) => {
-    console.log("exercise-vote, ex ", ex);
     return ex.name === exercise.name;
   });
-  // const thisExercise = { name: "Tricep Dips", votes: 0 };
-  console.log("exercise-vote, thisExercise[0] ", thisExercise[0]);
-  console.log("exercise-vote, thisExercise[0].votes ", thisExercise[0].votes);
   const votesSpent = thisExercise[0].votes;
-  // const votesSpent = 0;
 
   return (
     <div className="flex flex-col items-center bg-white rounded-xl p-2 border-2 border-gray-400 min-w-max">

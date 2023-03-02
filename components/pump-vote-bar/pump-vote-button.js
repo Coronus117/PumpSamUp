@@ -2,9 +2,7 @@ import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 
 const PumpVoteButton = ({ onClick, currVoteCount }) => {
-  // let votes = 10;
   const votes = useSelector((state) => state.votes);
-  console.log("pump-vote-button, votes ", votes);
   return (
     <Fragment>
       {currVoteCount === 0 ? (

@@ -128,7 +128,7 @@ const DUMMY_EX_ROUTINES = [
 
 export const getCurrentExerciseRoutine = () => {
   //12am on tues 2/21
-  const originDate = new Date("2023-02-21");
+  const originDate = new Date("2023-02-24");
   const currDate = new Date();
   // const currDate = new Date("2023-02-21");
   const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
@@ -138,6 +138,10 @@ export const getCurrentExerciseRoutine = () => {
     countCertainDays([1, 4], originDate, currDate) - 1;
   const whichExerciseRoutine =
     mondaysAndThusdaysPast % DUMMY_EX_ROUTINES.length;
+  console.log(
+    "getCurrentExerciseRoutine ",
+    DUMMY_EX_ROUTINES[whichExerciseRoutine]
+  );
   return DUMMY_EX_ROUTINES[whichExerciseRoutine];
 };
 
