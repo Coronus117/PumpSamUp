@@ -2,10 +2,9 @@ import React from "react";
 import PumpVoteButton from "./pump-vote-button";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getNextShowDateStringForHistory } from "@/helpers/helpers";
 import { voteActions } from "@/store";
 
-const ExerciseVote = ({ exercise }) => {
+const ExerciseVote = ({ exercise, nextShowDateUserHistoryKey }) => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state);
 
@@ -31,7 +30,7 @@ const ExerciseVote = ({ exercise }) => {
       console.log("dispatch increment");
       dispatch(
         voteActions.exerciseVoteIncrement({
-          date: getNextShowDateStringForHistory(),
+          date: nextShowDateUserHistoryKey,
           name: exercise.name,
         })
       );
@@ -40,26 +39,22 @@ const ExerciseVote = ({ exercise }) => {
       console.log("dispatch decrement");
       dispatch(
         voteActions.exerciseVoteDecrement({
-          date: getNextShowDateStringForHistory(),
+          date: nextShowDateUserHistoryKey,
           name: exercise.name,
         })
       );
     }
-
-    // fetch("https://pumpsamup-default-rtdb.firebaseio.com/votes.json", {
-    //   method: "PUT",
-    //   body: JSON.stringify(voteData),
-    //   headers: { "Content-Type": "application/json" },
-    // });
   };
 
   // Get how many votes the user spent on this exercise for the upcoming show
   // All spent points are in the user's voteHistory.
-  const nextShowDate = getNextShowDateStringForHistory();
-  console.log("exercise-vote, store.voteHistory ", store.voteHistory);
-  const thisExercise = store.voteHistory[nextShowDate].filter((ex) => {
-    return ex.name === exercise.name;
-  });
+  // console.log("exercise-vote, store.voteHistory ", store.voteHistory);
+
+  const thisExercise = store.voteHistory[nextShowDateUserHistoryKey].filter(
+    (ex) => {
+      return ex.name === exercise.name;
+    }
+  );
   const votesSpent = thisExercise[0].votes;
 
   return (

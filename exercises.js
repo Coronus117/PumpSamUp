@@ -126,30 +126,6 @@ const DUMMY_EX_ROUTINES = [
   ["Tricep Dips", "Pull Up", "Squat", "Side Planks"],
 ];
 
-export const getCurrentExerciseRoutine = () => {
-  //12am on tues 2/21
-  const originDate = new Date("2023-02-24");
-  const currDate = new Date();
-  // const currDate = new Date("2023-02-21");
-  const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-
-  const diffDays = Math.floor(Math.abs((currDate - originDate) / oneDay));
-  let mondaysAndThusdaysPast =
-    countCertainDays([1, 4], originDate, currDate) - 1;
-  const whichExerciseRoutine =
-    mondaysAndThusdaysPast % DUMMY_EX_ROUTINES.length;
-  console.log(
-    "getCurrentExerciseRoutine ",
-    DUMMY_EX_ROUTINES[whichExerciseRoutine]
-  );
-  return DUMMY_EX_ROUTINES[whichExerciseRoutine];
-};
-
-// days is an array of weekdays: 0 is Sunday, ..., 6 is Saturday
-function countCertainDays(days, d0, d1) {
-  var ndays = 1 + Math.round((d1 - d0) / (24 * 3600 * 1000));
-  var sum = function (a, b) {
-    return a + Math.floor((ndays + ((d0.getDay() + 6 - b) % 7)) / 7);
-  };
-  return days.reduce(sum, 0);
+export function getAllExerciseRoutines() {
+  return DUMMY_EX_ROUTINES;
 }
