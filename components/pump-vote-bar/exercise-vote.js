@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { voteActions } from "@/store";
 
-import { useSession, signOut } from "next-auth/client";
+import { useSession } from "next-auth/client";
 
 import AuthForm from "../auth/auth-form";
 
@@ -14,21 +14,6 @@ const ExerciseVote = ({ exercise, nextShowDateUserHistoryKey }) => {
 
   const dispatch = useDispatch();
   const store = useSelector((state) => state);
-
-  // const voteHandler = (direction) => {
-  //   if (direction === "up") {
-  //     incrementCookie("votes", -1);
-  //     setCurrUserVotes((prevState) => (prevState += 1));
-  //   } else {
-  //     incrementCookie("votes", 1);
-  //     setCurrUserVotes((prevState) => (prevState -= 1));
-  //   }
-  // };
-
-  // const { data, isLoading } = useSWR(
-  //   "https://pumpsamup-default-rtdb.firebaseio.com/votes.json",
-  //   (url) => fetch(url).then((res) => res.json())
-  // );
 
   const addVoteHandler = (voteModifier) => {
     // If user is logged in, modify votes
@@ -70,25 +55,12 @@ const ExerciseVote = ({ exercise, nextShowDateUserHistoryKey }) => {
   return (
     <div>
       {signinModalOpen && (
-        // <ModalSignin
-        //   open={signinModalOpen}
-        //   requestClose={() => setSigninModalOpen(false)}
-        // />
-
         <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-black bg-opacity-60">
           <div className="relative w-80 my-6 mx-auto max-w-3xl">
-            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-              <button
-                className="bg-transparent border-0 text-black"
-                onClick={() => setSigninModalOpen(false)}
-              >
-                <span className="text-black opacity-7 h-6 w-6 text-xl block bg-gray-400 py-0 rounded-full">
-                  x
-                </span>
-              </button>
-
-              <AuthForm />
-            </div>
+            <AuthForm
+              inModal={true}
+              modalCloseHandler={() => setSigninModalOpen(false)}
+            />
           </div>
         </div>
       )}
