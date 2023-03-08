@@ -65,7 +65,7 @@ function AuthForm() {
   };
 
   return (
-    <section className="p-2 border-2 border-black flex flex-col space-y-4 bg-white rounded-lg w-full lg:w-1/3">
+    <section className="p-2 border-2 border-black flex flex-col space-y-4 bg-white rounded-lg w-full ">
       <h1 className="text-2xl text-center">
         {isLogin ? "Login with existing account" : "Create new account"}
       </h1>

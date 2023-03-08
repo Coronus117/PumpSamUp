@@ -17,25 +17,25 @@ function MainHeader() {
               <span className="inline-block align-middle">PUMP SAM UP</span>
             </Link>
           </div>
-          <div className="flex flex-row justify-end space-x-4">
+          <div className="flex flex-row justify-end space-x-4 h-14">
             {!session && !loading && (
               <Link href="/auth" className="flex justify-end">
-                <div className="rounded-md w-max border-2 border-black p-3 bg-white">
+                <button className="rounded-md w-max border-2 border-black p-3 bg-white h-full">
                   Login
-                </div>
+                </button>
               </Link>
             )}
             {session && (
               <Link href="/profile">
-                <div className="rounded-md w-max border-2 border-black p-3 bg-white">
+                <button className="rounded-md w-max border-2 border-black p-3 bg-white h-full ">
                   Profile
-                </div>
+                </button>
               </Link>
             )}
             {session && (
               <button
                 onClick={logoutHandler}
-                className="rounded-md w-max border-2 border-black p-3 bg-white"
+                className="rounded-md w-max border-2 border-black p-3 bg-white h-full"
               >
                 Logout
               </button>

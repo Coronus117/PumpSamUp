@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ExerciseVote from "./exercise-vote";
-import { getCurrentExerciseRoutine, getFilteredExercise } from "@/exercises";
+import { getFilteredExercise } from "@/exercises";
 
 const PumpVoteBar = () => {
   const [showData, setShowData] = useState();
@@ -13,7 +13,6 @@ const PumpVoteBar = () => {
 
   console.log("showData ", showData);
 
-  // const currentExRoutine = getCurrentExerciseRoutine();
   return (
     <div className="bg-white rounded-lg p-4 border-2 border-gray-200 space-y-3 ">
       <div>Vote on exercises for the next show</div>

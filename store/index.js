@@ -3,11 +3,11 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 const initialState = {
   votes: 10,
   voteHistory: {
-    v2023_03_06: [
-      { name: "Bench Press", votes: 0 },
-      { name: "Pull Up", votes: 0 },
-      { name: "Calf Raise", votes: 0 },
-      { name: "Lateral Raise", votes: 0 },
+    v2023_03_09: [
+      { name: "Push Up", votes: 0 },
+      { name: "Bicep Curls", votes: 0 },
+      { name: "Squat", votes: 0 },
+      { name: "Sit Up", votes: 0 },
     ],
   },
 };
