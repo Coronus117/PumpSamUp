@@ -11,7 +11,7 @@ const PumpVoteBar = () => {
       .then((data) => setShowData(data));
   }, []);
 
-  console.log("showData ", showData);
+  // console.log("showData ", showData);
 
   return (
     <div className="bg-white rounded-lg p-4 border-2 border-gray-200 space-y-3 ">

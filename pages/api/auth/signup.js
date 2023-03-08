@@ -14,7 +14,7 @@ const handler = async (req, res) => {
       password.trim().length < 7
     ) {
       return res.status(422).json({
-        message:
+        error:
           "Invalid Input - Password should also be at least 7 characters long.",
       });
     }
@@ -25,7 +25,7 @@ const handler = async (req, res) => {
     // Check if user already exists
     const existingUser = await db.collection("users").findOne({ email: email });
     if (existingUser) {
-      res.status(422).json({ message: "User exists already!" });
+      res.status(422).json({ error: "User exists already!" });
       client.close();
       return;
     }

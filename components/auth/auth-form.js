@@ -10,14 +10,19 @@ const createUser = async (email, password) => {
       "Content-Type": "application/json",
     },
   });
-
   const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Something went wrong!");
-  }
-
   return data;
+};
+
+const loginUser = async (enteredEmail, enteredPassword) => {
+  // log user in. Result will be content which might be data or it could be an error
+  const result = await signIn("credentials", {
+    // Do not auto redirect if we throw an error, leave on page and show an error message
+    redirect: false,
+    email: enteredEmail,
+    password: enteredPassword,
+  });
+  return result;
 };
 
 function AuthForm({ inModal = false, modalCloseHandler }) {
@@ -25,11 +30,14 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
   const passwordInputRef = useRef();
 
   const [isLogin, setIsLogin] = useState(true);
+  const [errorMessage, setErrorMessage] = useState();
+
   const router = useRouter();
 
   function switchAuthModeHandler(button) {
     if ((button === "login" && !isLogin) || (button === "signup" && isLogin)) {
       setIsLogin((prevState) => !prevState);
+      setErrorMessage();
     }
   }
 
@@ -41,25 +49,36 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
     // TODO Add input validation
 
     if (isLogin) {
-      // log user in. Result will be content which might be data or it could be an error
-      const result = await signIn("credentials", {
-        // Do not auto redirect if we throw an error, leave on page and show an error message
-        redirect: false,
-        email: enteredEmail,
-        password: enteredPassword,
-      });
-
-      if (!result.error) {
+      const loginUserResult = await loginUser(enteredEmail, enteredPassword);
+      if (!loginUserResult.error) {
         // login successful, redirect
-        router.replace("/profile");
+        if (inModal) {
+          // If we're in a modal, close the modal
+          modalCloseHandler();
+        }
+        router.replace("/");
+      } else {
+        setErrorMessage("Invalid Email or Password");
       }
     } else {
       // create mode
-      try {
-        const result = await createUser(enteredEmail, enteredPassword);
-        console.log("result ", result);
-      } catch (error) {
-        console.log("error ", error);
+      const createUserResult = await createUser(enteredEmail, enteredPassword);
+      if (!createUserResult.error) {
+        // Created user, now log in
+        const loginUserResult = await loginUser(enteredEmail, enteredPassword);
+        if (!loginUserResult.error) {
+          // login successful, redirect
+          if (inModal) {
+            // If we're in a modal, close the modal
+            modalCloseHandler();
+          }
+          router.replace("/");
+        } else {
+          setErrorMessage("Invalid Email or Password");
+        }
+      } else {
+        console.log("createUserResult.error ", createUserResult.error);
+        setErrorMessage(createUserResult.error);
       }
     }
   };
@@ -81,9 +100,9 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
             <path
               d="M15 9.00004L9 15M15 15L9 9.00004M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z"
               stroke="#000000"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </button>
@@ -138,6 +157,9 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
               className="border-2 border-gray-300 rounded-lg"
             />
           </div>
+          {errorMessage && (
+            <div className="text-red-500 font-medium pl-1">{errorMessage}</div>
+          )}
           <div className="w-full flex justify-center items-center mt-4 flex-col">
             <button
               className={
