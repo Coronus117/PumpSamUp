@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/client";
+import { useRouter } from "next/router";
 
 function MainHeader() {
   const [session, loading] = useSession();
+  const router = useRouter();
 
-  const logoutHandler = () => {
-    signOut();
+  const logoutHandler = async () => {
+    const data = await signOut({ redirect: false, callbackUrl: "/" });
+    router.replace(data.url);
   };
 
   return (
