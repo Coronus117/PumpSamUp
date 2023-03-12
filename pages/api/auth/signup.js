@@ -34,6 +34,8 @@ const handler = async (req, res) => {
     const result = await db.collection("users").insertOne({
       email: email,
       password: hashedPassword,
+      votes: 10,
+      voteHistory: {},
     });
 
     // TODO: Error handling

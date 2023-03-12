@@ -1,12 +1,14 @@
 import "@/styles/globals.css";
 import Layout from "@/components/layout/layout";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import { Provider as AuthProvider } from "next-auth/client";
 import store from "@/store";
+import DbConnect from "@/components/db-connect";
 
 export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
+      <DbConnect />
       <AuthProvider session={pageProps.session}>
         <Layout>
           <Component {...pageProps} />

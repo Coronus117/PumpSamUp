@@ -44,17 +44,11 @@ function MainHeader() {
               </button>
             )}
           </div>
-
-          {/* <Link href="/">
-            <div className="absolute top-4 right-4 flex items-center border-2 border-black p-3 bg-white">
-              Sign In
-            </div>
-          </Link> */}
         </div>
-        <div className="flex justify-center text-lg lg:text-2xl">
+        <div className="bg-white border-2 rounded-xl flex justify-center text-lg lg:text-2xl">
           <p>
-            <span className="font-bold">LIVE</span> - Every Monday and Thursday
-            at 8pm EST
+            <span className="font-bold">LIVE</span> - Monday & Thursday - 8pm
+            est
           </p>
         </div>
       </div>

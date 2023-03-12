@@ -3,21 +3,39 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 const initialState = {
   votes: 10,
   voteHistory: {
-    v2023_03_09: [
-      { name: "Push Up", votes: 0 },
-      { name: "Bicep Curls", votes: 0 },
-      { name: "Squat", votes: 0 },
-      { name: "Sit Up", votes: 0 },
+    v2023_03_13: [
+      { name: "Tricep Dips", votes: 0 },
+      { name: "Bent Over Row", votes: 0 },
+      { name: "Lunge", votes: 0 },
+      { name: "Glute Bridge", votes: 0 },
     ],
   },
+  changed: false,
 };
 
 const voteSlice = createSlice({
   name: "voteData",
   initialState: initialState,
   reducers: {
+    replaceVotes(state, action) {
+      state.votes = action.payload.votes;
+      state.voteHistory = action.payload.voteHistory;
+      // If the date is NOT found in the user history, add it
+      if (
+        !state.voteHistory.hasOwnProperty(
+          action.payload.nextShowDateUserHistoryKey
+        )
+      ) {
+        state.voteHistory[action.payload.nextShowDateUserHistoryKey] =
+          action.payload.currentExercises.map((ex) => {
+            return { name: ex, votes: 0 };
+          });
+      }
+    },
     exerciseVoteIncrement(state, action) {
+      state.changed = true;
       state.votes -= 1;
+      // Increase the vote for the specific exercise
       state.voteHistory = {
         [action.payload.date]: state.voteHistory[action.payload.date].map(
           (ex) => {
@@ -30,7 +48,9 @@ const voteSlice = createSlice({
       };
     },
     exerciseVoteDecrement(state, action) {
+      state.changed = true;
       state.votes += 1;
+      // Decrease the vote for the specific exercise
       state.voteHistory = {
         [action.payload.date]: state.voteHistory[action.payload.date].map(
           (ex) => {

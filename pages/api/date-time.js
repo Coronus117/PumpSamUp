@@ -7,12 +7,7 @@ import {
   getNextShowDateStringForHistory,
 } from "@/helpers/helpers";
 
-const {
-  zonedTimeToUtc,
-  utcToZonedTime,
-  format,
-  getTimezoneOffset,
-} = require("date-fns-tz");
+const { getTimezoneOffset } = require("date-fns-tz");
 
 const handler = (req, res) => {
   if (req.method === "GET") {
