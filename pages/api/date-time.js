@@ -100,6 +100,6 @@ export const getCurrentExerciseRoutine = () => {
     mondaysAndThusdaysPast % getAllExerciseRoutines().length;
   //   console.log("whichExerciseRoutine ", whichExerciseRoutine);
   const thisExerciseRoutine = getAllExerciseRoutines()[whichExerciseRoutine];
-  console.log("thisExerciseRoutine ", thisExerciseRoutine);
+  // console.log("thisExerciseRoutine ", thisExerciseRoutine);
   return thisExerciseRoutine;
 };

@@ -8,8 +8,8 @@ import DbConnect from "@/components/db-connect";
 export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <DbConnect />
       <AuthProvider session={pageProps.session}>
+        <DbConnect />
         <Layout>
           <Component {...pageProps} />
         </Layout>

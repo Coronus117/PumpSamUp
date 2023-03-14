@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
+import Spinner from "../ui/Spinner";
 
 const PumpVoteButton = ({ onClick, currVoteCount, loading }) => {
   const votes = useSelector((state) => state.votes);
@@ -9,9 +10,9 @@ const PumpVoteButton = ({ onClick, currVoteCount, loading }) => {
         <button
           onClick={() => onClick("up")}
           disabled={!votes || loading}
-          className="bg-gray-300 py-2 border-2 select-none border-gray-300 hover:bg-gray-400 active:bg-white rounded-md disabled:opacity-50 disabled:pointer-events-none w-full"
+          className="bg-gray-300 py-2 border-2 select-none border-gray-300 hover:bg-gray-400 active:bg-white rounded-md disabled:opacity-50 disabled:pointer-events-none w-full flex justify-center items-center"
         >
-          VOTE
+          {loading ? <Spinner /> : "VOTE"}
         </button>
       ) : (
         <div className="w-full gap-2 grid grid-cols-2">
@@ -20,14 +21,14 @@ const PumpVoteButton = ({ onClick, currVoteCount, loading }) => {
             disabled={loading}
             className="bg-gray-300 h-10 border-2 select-none border-gray-300 hover:bg-gray-400 active:bg-white rounded-md"
           >
-            -
+            {loading ? <Spinner /> : "-"}
           </button>
           <button
             onClick={() => onClick("up")}
             disabled={!votes || loading}
-            className="bg-gray-300 h-10 border-2 select-none border-gray-300 hover:bg-gray-400 active:bg-white rounded-md disabled:opacity-50 disabled:pointer-events-none"
+            className="bg-gray-300 h-10 border-2 select-none border-gray-300 hover:bg-gray-400 active:bg-white rounded-md disabled:opacity-50 disabled:pointer-events-none flex justify-center items-center"
           >
-            +
+            {/* {loading ? <Spinner /> : "+"} */}+
           </button>
         </div>
       )}

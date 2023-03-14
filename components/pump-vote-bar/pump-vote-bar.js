@@ -1,33 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ExerciseVote from "./exercise-vote";
-import { getFilteredExercise } from "@/exercises";
+import { useSelector } from "react-redux";
 
 const PumpVoteBar = () => {
-  const [showData, setShowData] = useState();
+  const voteHistory = useSelector((state) => state.voteHistory);
+  const nextShowName = useSelector((state) => state.nextShowName);
 
-  useEffect(() => {
-    fetch("/api/date-time")
-      .then((response) => response.json())
-      .then((data) => setShowData(data));
-  }, []);
-
-  // console.log("showData ", showData);
+  // console.log("voteHistory ", voteHistory);
+  // console.log("nextShowName ", nextShowName);
 
   return (
     <div className="bg-white rounded-lg p-4 border-2 border-gray-200 space-y-3 ">
       <div>Vote on exercises for the next show</div>
       <div className="gap-4 grid grid-cols-2 lg:grid-cols-4">
-        {showData &&
-          showData.currentExercises.map((ex) => {
-            let exerciseData = getFilteredExercise(ex);
-            return (
-              <ExerciseVote
-                key={ex}
-                exercise={exerciseData}
-                nextShowDateUserHistoryKey={showData.nextShowDateUserHistoryKey}
-              />
-            );
-          })}
+        {voteHistory &&
+          nextShowName &&
+          voteHistory[nextShowName].map((ex) => (
+            <ExerciseVote
+              key={ex.name}
+              exerciseName={ex.name}
+              exerciseVotes={ex.votes}
+              showDate={nextShowName}
+            />
+          ))}
       </div>
     </div>
   );

@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import { fetchVoteData, sendVoteData } from "@/store/vote-actions";
+import {
+  fetchVoteData,
+  sendVoteData,
+  fetchShowData,
+  sendShowData,
+} from "@/store/vote-actions";
 import { useSelector, useDispatch } from "react-redux";
 
 let isInitial = true;
@@ -10,18 +15,20 @@ const DbConnect = () => {
 
   useEffect(() => {
     dispatch(fetchVoteData());
+    dispatch(fetchShowData());
   }, [dispatch]);
 
   useEffect(() => {
-    console.log("isInitial ", isInitial);
+    // console.log("isInitial ", isInitial);
     if (isInitial) {
       isInitial = false;
       return;
     }
 
     if (state.changed) {
-      console.log("State CHANGED!");
+      // console.log("State CHANGED!");
       dispatch(sendVoteData(state));
+      dispatch(sendShowData(state));
     }
   }, [state, dispatch]);
   return <div></div>;

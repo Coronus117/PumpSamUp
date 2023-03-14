@@ -8,7 +8,7 @@ import { useSession } from "next-auth/client";
 
 import AuthForm from "../auth/auth-form";
 
-const ExerciseVote = ({ exercise, nextShowDateUserHistoryKey }) => {
+const ExerciseVote = ({ exerciseName, exerciseVotes, showDate }) => {
   const [signinModalOpen, setSigninModalOpen] = useState(false);
   const [session, loading] = useSession();
 
@@ -19,19 +19,19 @@ const ExerciseVote = ({ exercise, nextShowDateUserHistoryKey }) => {
     // If user is logged in, modify votes
     if (session) {
       if (voteModifier === "up") {
-        console.log("dispatch increment");
+        // console.log("dispatch increment");
         dispatch(
           voteActions.exerciseVoteIncrement({
-            date: nextShowDateUserHistoryKey,
-            name: exercise.name,
+            date: showDate,
+            name: exerciseName,
           })
         );
       } else {
-        console.log("dispatch decrement");
+        // console.log("dispatch decrement");
         dispatch(
           voteActions.exerciseVoteDecrement({
-            date: nextShowDateUserHistoryKey,
-            name: exercise.name,
+            date: showDate,
+            name: exerciseName,
           })
         );
       }
@@ -40,17 +40,6 @@ const ExerciseVote = ({ exercise, nextShowDateUserHistoryKey }) => {
       setSigninModalOpen(true);
     }
   };
-
-  // Get how many votes the user spent on this exercise for the upcoming show
-  // All spent points are in the user's voteHistory.
-  // console.log("exercise-vote, store.voteHistory ", store.voteHistory);
-
-  const thisExercise = store.voteHistory[nextShowDateUserHistoryKey].filter(
-    (ex) => {
-      return ex.name === exercise.name;
-    }
-  );
-  const votesSpent = thisExercise[0].votes;
 
   return (
     <div>
@@ -65,12 +54,12 @@ const ExerciseVote = ({ exercise, nextShowDateUserHistoryKey }) => {
         </div>
       )}
       <div className="flex flex-col items-center bg-white rounded-xl p-2 border-2 border-gray-400 min-w-max">
-        <div>{exercise.name}</div>
-        <div className="text-5xl">{votesSpent}</div>
+        <div>{exerciseName}</div>
+        <div className="text-5xl">{exerciseVotes}</div>
         <div className="mt-3 w-full">
           <PumpVoteButton
             onClick={addVoteHandler}
-            currVoteCount={votesSpent}
+            currVoteCount={exerciseVotes}
             loading={loading}
           />
         </div>
