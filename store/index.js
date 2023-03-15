@@ -24,6 +24,7 @@ const voteSlice = createSlice({
   initialState: initialState,
   reducers: {
     replaceVotes(state, action) {
+      // state.changed = true;
       state.votes = action.payload.votes;
       state.voteHistory = action.payload.voteHistory;
       // If the date is NOT found in the user history, add it
@@ -56,6 +57,7 @@ const voteSlice = createSlice({
       state.nextShowData = state.nextShowData.map((ex) => {
         if (ex.name === action.payload.name) {
           ex.votes = ex.votes + 1;
+          ex.reps = Math.floor(ex.votes / ex.pumpsPerRep);
         }
         return ex;
       });
@@ -69,6 +71,7 @@ const voteSlice = createSlice({
           (ex) => {
             if (ex.name === action.payload.name) {
               ex.votes = ex.votes - 1;
+              ex.reps = Math.floor(ex.votes / ex.pumpsPerRep);
             }
             return ex;
           }
@@ -83,6 +86,7 @@ const voteSlice = createSlice({
       });
     },
     replaceShow(state, action) {
+      // state.changed = true;
       state.nextShowData = action.payload.nextShowExerciseData;
       state.nextShowName = action.payload.nextShowName;
     },

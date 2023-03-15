@@ -12,6 +12,13 @@ export default function Home() {
         {/* <PumpBank /> */}
         <NextShowBar />
         <PumpVoteBar />
+        <div>
+          <iframe
+            className="w-full h-72"
+            src={`https://rumble.com/embed/v6uz6v/?pub=7a20&rel=0&autoplay=2`}
+            allowFullScreen
+          />
+        </div>
       </div>
     </div>
   );

@@ -74,6 +74,7 @@ export const fetchShowData = () => {
 
       const exercises = showData.exercises.map((ex) => {
         const thisExData = getFilteredExercise(ex.name);
+        console.log("ex.votes ", ex.votes);
         return {
           ...thisExData,
           votes: ex.votes,

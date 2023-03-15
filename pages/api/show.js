@@ -14,8 +14,9 @@ const handler = async (req, res) => {
     try {
       client = await connectDatabase();
     } catch (error) {
-      res.status(500).json({ message: "Connecting to the database failed!" });
-      return;
+      return res
+        .status(500)
+        .json({ message: "Connecting to the database failed!" });
     }
 
     const nextShowDate = getNextShowDate();
@@ -42,15 +43,13 @@ const handler = async (req, res) => {
     }
 
     // console.log("nextShow ", nextShow);
-    res.status(200).json(nextShow);
-    // .json({ nextShowData: nextShow, currentExercises: currentExercises });
+    return res.status(200).json(nextShow);
   }
   if (req.method === "PUT") {
     const session = await getSession({ req: req });
 
     if (!session) {
-      res.status(401).json({ message: "Not authenticated!" });
-      return;
+      return res.status(401).json({ message: "Not authenticated!" });
     }
 
     // Connect to mongodb
@@ -58,8 +57,9 @@ const handler = async (req, res) => {
     try {
       client = await connectDatabase();
     } catch (error) {
-      res.status(500).json({ message: "Connecting to the database failed!" });
-      return;
+      return res
+        .status(500)
+        .json({ message: "Connecting to the database failed!" });
     }
 
     const nextShowDate = getNextShowDate();
@@ -79,7 +79,6 @@ const handler = async (req, res) => {
         { name: nextShowDateFormatted },
         { $set: { exercises: newShowVotes } }
       );
-      return;
     } else {
       const result = await showsCollection.insertOne({
         name: nextShowDateFormatted,
@@ -88,8 +87,9 @@ const handler = async (req, res) => {
     }
 
     client.close();
-    res.status(200).json({ message: "Show Votes Updated!" });
+    return res.status(200).json({ message: "Show Votes Updated!" });
   }
+  // res.status(500).json({ message: "HOW DID YOU GET HERE" });
 };
 
 export default handler;
