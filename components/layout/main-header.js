@@ -1,14 +1,19 @@
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/client";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { fetchVoteData, fetchShowData } from "@/store/vote-actions";
 
 function MainHeader() {
   const [session, loading] = useSession();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const logoutHandler = async () => {
     const data = await signOut({ redirect: false, callbackUrl: "/" });
     router.replace(data.url);
+    dispatch(fetchVoteData());
+    dispatch(fetchShowData());
   };
 
   return (

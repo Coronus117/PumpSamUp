@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import { signIn } from "next-auth/client";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { fetchVoteData, fetchShowData } from "@/store/vote-actions";
 
 const createUser = async (email, password) => {
   const response = await fetch("/api/auth/signup", {
@@ -33,6 +35,7 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
   const [errorMessage, setErrorMessage] = useState();
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   function switchAuthModeHandler(button) {
     if ((button === "login" && !isLogin) || (button === "signup" && isLogin)) {
@@ -57,6 +60,8 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
           modalCloseHandler();
         }
         router.replace("/");
+        dispatch(fetchVoteData());
+        dispatch(fetchShowData());
       } else {
         setErrorMessage("Invalid Email or Password");
       }
@@ -73,6 +78,8 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
             modalCloseHandler();
           }
           router.replace("/");
+          dispatch(fetchVoteData());
+          dispatch(fetchShowData());
         } else {
           setErrorMessage("Invalid Email or Password");
         }
