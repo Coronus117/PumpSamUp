@@ -10,10 +10,8 @@ const handler = async (req, res) => {
   if (req.method === "GET") {
     // Make sure user is authenticated, then use their email to get their data (vote history)
     const session = await getSession({ req: req });
-    // if (!session) {
-    //   res.status(401).json({ message: "Not authenticated!" });
-    //   return;
-    // }
+
+    // console.log("session ", session);
     if (session) {
       const userEmail = session.user.email;
 
@@ -31,6 +29,7 @@ const handler = async (req, res) => {
       let user = await usersCollection.findOne({ email: userEmail });
       client.close();
 
+      console.log("user ", user);
       // Look inside voteHistory and see if we can find the current exercise date
       const nextShowDate = getNextShowDate();
       const nextShowDateFormatted =

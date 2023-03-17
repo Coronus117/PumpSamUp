@@ -20,8 +20,6 @@ export const fetchVoteData = () => {
         voteActions.replaceVotes({
           votes: voteData.votes,
           voteHistory: voteData.voteHistory,
-          // nextShowDateUserHistoryKey: showData.nextShowDateUserHistoryKey,
-          // currentExercises: showData.currentExercises,
         })
       );
     } catch (error) {
@@ -74,7 +72,6 @@ export const fetchShowData = () => {
 
       const exercises = showData.exercises.map((ex) => {
         const thisExData = getFilteredExercise(ex.name);
-        console.log("ex.votes ", ex.votes);
         return {
           ...thisExData,
           votes: ex.votes,

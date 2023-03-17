@@ -3,6 +3,7 @@ import { signIn } from "next-auth/client";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { fetchVoteData, fetchShowData } from "@/store/vote-actions";
+import Spinner from "../ui/Spinner";
 
 const createUser = async (email, password) => {
   const response = await fetch("/api/auth/signup", {
@@ -33,6 +34,7 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
 
   const [isLogin, setIsLogin] = useState(true);
   const [errorMessage, setErrorMessage] = useState();
+  const [submitting, setSubmitting] = useState();
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -48,6 +50,8 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
     event.preventDefault();
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
+
+    setSubmitting(true);
 
     // TODO Add input validation
 
@@ -170,10 +174,10 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
           <div className="w-full flex justify-center items-center mt-4 flex-col">
             <button
               className={
-                "disabled:pointer-events-none h-10 w-1/2 border-2 select-none  active:bg-white rounded-md bg-red-500 text-white border-black"
+                "disabled:pointer-events-none h-10 w-1/2 border-2 select-none  active:bg-white rounded-md bg-red-500 text-white border-black flex justify-center items-center"
               }
             >
-              {isLogin ? "Log In" : "Create Account"}
+              {submitting ? <Spinner /> : isLogin ? "Log In" : "Create Account"}
             </button>
             {inModal && (
               <button
