@@ -68,6 +68,7 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
         dispatch(fetchShowData());
       } else {
         setErrorMessage("Invalid Email or Password");
+        setSubmitting(false);
       }
     } else {
       // create mode
@@ -86,10 +87,12 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
           dispatch(fetchShowData());
         } else {
           setErrorMessage("Invalid Email or Password");
+          setSubmitting(false);
         }
       } else {
         console.log("createUserResult.error ", createUserResult.error);
         setErrorMessage(createUserResult.error);
+        setSubmitting(false);
       }
     }
   };
@@ -126,7 +129,7 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
         <div className="w-full gap-2 grid grid-cols-2">
           <button
             onClick={() => switchAuthModeHandler("login")}
-            disabled={isLogin}
+            disabled={isLogin || submitting}
             className={`disabled:pointer-events-none h-10 border-2 select-none  active:bg-white rounded-md ${
               isLogin
                 ? "bg-red-500 text-white border-black"
@@ -137,7 +140,7 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
           </button>
           <button
             onClick={() => switchAuthModeHandler("signup")}
-            disabled={!isLogin}
+            disabled={!isLogin || submitting}
             className={`disabled:pointer-events-none h-10 border-2 select-none  active:bg-white rounded-md ${
               !isLogin
                 ? "bg-red-500 text-white border-black"
@@ -156,6 +159,7 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
               required
               ref={emailInputRef}
               className="border-2 border-gray-300 rounded-lg"
+              disabled={submitting}
             />
           </div>
           <div className="flex flex-col space-y-0 mt-2">
@@ -166,6 +170,7 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
               required
               ref={passwordInputRef}
               className="border-2 border-gray-300 rounded-lg"
+              disabled={submitting}
             />
           </div>
           {errorMessage && (
@@ -176,6 +181,7 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
               className={
                 "disabled:pointer-events-none h-10 w-1/2 border-2 select-none  active:bg-white rounded-md bg-red-500 text-white border-black flex justify-center items-center"
               }
+              disabled={submitting}
             >
               {submitting ? <Spinner /> : isLogin ? "Log In" : "Create Account"}
             </button>

@@ -71,6 +71,7 @@ const handler = async (req, res) => {
 
     const userEmail = session.user.email;
     const newVoteHistory = req.body.state.voteHistory;
+    const votes = req.body.state.votes;
 
     const client = await connectDatabase();
 
@@ -86,7 +87,7 @@ const handler = async (req, res) => {
 
     const result = await usersCollection.updateOne(
       { email: userEmail },
-      { $set: { voteHistory: newVoteHistory } }
+      { $set: { voteHistory: newVoteHistory, votes: votes } }
     );
 
     client.close();

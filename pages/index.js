@@ -4,6 +4,12 @@ import PumpVoteBar from "@/components/pump-vote-bar/pump-vote-bar";
 import NextPump from "@/components/next-pump/next-pump";
 import NextShowBar from "@/components/next-show-bar/next-show-bar";
 
+var cron = require("node-cron");
+
+cron.schedule("* * * * *", () => {
+  console.log("running a task every minute");
+});
+
 export default function Home() {
   return (
     <div className="p-3 lg:p-4 leading-tight flex justify-center ">
