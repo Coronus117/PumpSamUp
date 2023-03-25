@@ -29,7 +29,7 @@ const handler = async (req, res) => {
       let user = await usersCollection.findOne({ email: userEmail });
       client.close();
 
-      console.log("user ", user);
+      // console.log("user ", user);
       // Look inside voteHistory and see if we can find the current exercise date
       const nextShowDate = getNextShowDate();
       const nextShowDateFormatted =
