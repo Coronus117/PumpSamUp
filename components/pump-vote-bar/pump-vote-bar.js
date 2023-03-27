@@ -12,7 +12,7 @@ const PumpVoteBar = () => {
   return (
     <div className=" rounded-lg p-4 space-y-3">
       <div className="flex flex-row justify-between">
-        <div className="text-xl font-medium flex items-center">
+        <div className="text-lg lg:text-xl font-medium flex items-center">
           Vote on exercises for the next show
         </div>
         {session && <PumpBank />}

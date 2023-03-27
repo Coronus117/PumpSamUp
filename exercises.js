@@ -55,7 +55,7 @@ const DUMMY_EXERCISES = [
   },
   {
     name: "Plank",
-    pumpType: "rep",
+    pumpType: "second",
     pumpsPerRep: 5,
     bodyPart: "Abs",
   },
@@ -73,13 +73,13 @@ const DUMMY_EXERCISES = [
   },
   {
     name: "Flutter Kicks",
-    pumpType: "rep",
+    pumpType: "second",
     pumpsPerRep: 10,
     bodyPart: "Abs",
   },
   {
     name: "Side Planks",
-    pumpType: "rep",
+    pumpType: "second",
     pumpsPerRep: 5,
     bodyPart: "Oblique",
   },
@@ -97,7 +97,7 @@ const DUMMY_EXERCISES = [
   },
   {
     name: "Glute Bridge",
-    pumpType: "rep",
+    pumpType: "second",
     pumpsPerRep: 5,
     bodyPart: "Glute",
   },
