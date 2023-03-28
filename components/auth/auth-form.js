@@ -152,7 +152,7 @@ function AuthForm({ inModal = false, modalCloseHandler }) {
         </div>
         <div className="pl-2">
           Member Benefits:
-          <ul class="list-disc pl-6">
+          <ul className="list-disc pl-6">
             <li>Vote on exercises!</li>
             <li>Earn 10 free votes every day!</li>
           </ul>

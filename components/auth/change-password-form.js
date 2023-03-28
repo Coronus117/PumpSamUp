@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import { getSession } from "next-auth/client";
+import Spinner from "../ui/Spinner";
 
-const ChangePassword = () => {
+const ChangePassword = ({ onChangePassword, loading }) => {
   const newPasswordInputRef = useRef();
   const oldPasswordInputRef = useRef();
 
@@ -9,6 +10,13 @@ const ChangePassword = () => {
     event.preventDefault();
     const enteredNewPassword = newPasswordInputRef.current.value;
     const enteredOldPassword = oldPasswordInputRef.current.value;
+
+    // TODO: Add validation
+
+    onChangePassword({
+      oldPassword: enteredOldPassword,
+      newPassword: enteredNewPassword,
+    });
   };
 
   return (
@@ -16,7 +24,7 @@ const ChangePassword = () => {
       <h1 className="text-2xl text-center">Change Password</h1>
       <form onSubmit={submitHandler} className="flex flex-col">
         <div className="flex flex-col space-y-0">
-          <label htmlFor="email">New Password</label>
+          <label htmlFor="newPassword">New Password</label>
           <input
             type="password"
             id="newPassword"
@@ -26,7 +34,7 @@ const ChangePassword = () => {
           />
         </div>
         <div className="flex flex-col space-y-0 mt-2">
-          <label htmlFor="password">Old Password</label>
+          <label htmlFor="oldPassword">Old Password</label>
           <input
             type="password"
             id="oldPassword"
@@ -37,11 +45,12 @@ const ChangePassword = () => {
         </div>
         <div className="w-full flex justify-center mt-4 mb-2">
           <button
+            disabled={loading}
             className={
-              "disabled:pointer-events-none h-10 w-1/2 border-2 select-none hover:border-black hover:bg-gray-400 active:bg-white rounded-md bg-red-500 text-white border-black"
+              "disabled:pointer-events-none h-10 w-1/2 border-2 flex justify-center items-center select-none hover:border-black hover:bg-gray-400 active:bg-white rounded-md bg-red-500 text-white border-black"
             }
           >
-            Change Password
+            {loading ? <Spinner /> : "Change Password"}
           </button>
         </div>
       </form>
